@@ -7,10 +7,11 @@ import { Crud } from 'genesis'
  * @param {Function|Object|boolean} props
  * @param {Object} meta
  * @param {Array} children
+ * @param {Object/string} redirect
  * @returns {Object}
  */
-export const route = (path, name, component, props = null, meta = {}, children = []) => {
-  return {path, name, component, props, meta, children}
+export const route = (path, name, component, props = null, meta = {}, children = [], redirect = null) => {
+  return {path, name, component, props, meta, children, redirect}
 }
 
 /**
@@ -30,10 +31,11 @@ export const route = (path, name, component, props = null, meta = {}, children =
  * @param {string} component
  * @param {Object} meta
  * @param {string} name
+ * @param {Object/string} redirect
  * @returns {Object}
  */
-export const child = (path, namespace, props, uri, scope, component, meta = {}, name = '') => {
-  return route(uri, name || (namespace + '.' + scope), component, (route) => props(scope, route), meta)
+export const child = (path, namespace, props, uri, scope, component, meta = {}, name = '', redirect = null) => {
+  return route(uri, name || (namespace + '.' + scope), component, (route) => props(scope, route), meta, redirect)
 }
 
 /**
